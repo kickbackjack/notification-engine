@@ -35,8 +35,13 @@ describe('Notification API:', function() {
       request(app)
         .post('/api/notifications')
         .send({
-          name: 'New Notification',
-          info: 'This is the brand new notification!!!'
+          title: 'New Notification',
+          description: 'This is the brand new notification!!!',
+          actions: [
+            { title: 'Action 1', description: 'Action 1 description'},
+            { title: 'Action 2', description: 'Action 2 description'},
+            { title: 'Action 3', description: 'Action 3 description'},
+          ]
         })
         .expect(201)
         .expect('Content-Type', /json/)
@@ -50,8 +55,8 @@ describe('Notification API:', function() {
     });
 
     it('should respond with the newly created notification', function() {
-      newNotification.name.should.equal('New Notification');
-      newNotification.info.should.equal('This is the brand new notification!!!');
+      newNotification.title.should.equal('New Notification');
+      newNotification.description.should.equal('This is the brand new notification!!!');
     });
 
   });
@@ -78,8 +83,8 @@ describe('Notification API:', function() {
     });
 
     it('should respond with the requested notification', function() {
-      notification.name.should.equal('New Notification');
-      notification.info.should.equal('This is the brand new notification!!!');
+      notification.title.should.equal('New Notification');
+      notification.description.should.equal('This is the brand new notification!!!');
     });
 
   });
@@ -91,8 +96,8 @@ describe('Notification API:', function() {
       request(app)
         .put('/api/notifications/' + newNotification._id)
         .send({
-          name: 'Updated Notification',
-          info: 'This is the updated notification!!!'
+          title: 'Updated Notification',
+          description: 'This is the updated notification!!!'
         })
         .expect(200)
         .expect('Content-Type', /json/)
@@ -110,8 +115,8 @@ describe('Notification API:', function() {
     });
 
     it('should respond with the updated notification', function() {
-      updatedNotification.name.should.equal('Updated Notification');
-      updatedNotification.info.should.equal('This is the updated notification!!!');
+      updatedNotification.title.should.equal('Updated Notification');
+      updatedNotification.description.should.equal('This is the updated notification!!!');
     });
 
   });

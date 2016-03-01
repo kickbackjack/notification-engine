@@ -3,9 +3,16 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 var NotificationSchema = new mongoose.Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  description: String,
+  actions: [{ 
+  	title: String,
+  	description: String,
+  	selected: { type: Boolean, default: false },
+  	selectedDate: Date
+  }],
+  date: { type: Date, default: Date.now },
+  acknowledged: { type: Boolean, default: false }
 });
 
 export default mongoose.model('Notification', NotificationSchema);
